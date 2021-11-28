@@ -1,6 +1,8 @@
 package com.lab.systemModel;
 
+import com.lab.functions.InitialLogicStructureFunction;
 import com.lab.functions.LogicStructureFunction;
+import com.lab.functions.ModifiedLogicStructureFunction;
 
 public class SystemModel {
     private final LogicStructureFunction logicStructureFunction;
@@ -9,8 +11,19 @@ public class SystemModel {
 
     private SystemStateVector systemStateVector;
 
+    public static SystemModel createInitialSystem(){
+        return new SystemModel(new InitialLogicStructureFunction(),
+                FailedElementsStatistics.createForInitialSystem(),
+                RearrangeTable.createForInitialSystem());
+    }
 
-    public SystemModel(LogicStructureFunction logicStructureFunction,
+    public static SystemModel createModifiedSystem(){
+        return new SystemModel(new ModifiedLogicStructureFunction(),
+                FailedElementsStatistics.createForModifiedSystem(),
+                RearrangeTable.createForModifiedSystem());
+    }
+
+    private SystemModel(LogicStructureFunction logicStructureFunction,
                        FailedElementsStatistics failedElementsStatistics,
                        RearrangeTable rearrangeTable) {
         this.logicStructureFunction = logicStructureFunction;
