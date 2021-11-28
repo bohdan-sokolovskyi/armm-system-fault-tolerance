@@ -3,14 +3,23 @@ package com.lab.systemModel;
 import java.util.Arrays;
 
 public class SystemStateVector {
-    public boolean[] pr; //processors
-    public boolean[] c; //controllers
-    public boolean[] a; //adapters
-    public boolean[] m; //magistrates
-    public boolean[] d; //detectors
-    public boolean[] b; //busses
+    public final boolean[] pr; //processors
+    public final boolean[] c; //controllers
+    public final boolean[] a; //adapters
+    public final boolean[] m; //magistrates
+    public final boolean[] d; //detectors
+    public final boolean[] b; //busses
 
-    public SystemStateVector(boolean[] pr, boolean[] c, boolean[] a, boolean[] m, boolean[] d, boolean[] b) {
+    public static SystemStateVector createForInitialSystem(){
+        return new SystemStateVector(new boolean[5],new boolean[5],new boolean[3],new boolean[2],new boolean[5],new boolean[3]);
+    }
+
+    public static SystemStateVector createSSVforModifiedSystem(){
+        //TODO change for modifiedSystem
+        throw new RuntimeException("Not implemented!");
+    }
+
+    private SystemStateVector(boolean[] pr, boolean[] c, boolean[] a, boolean[] m, boolean[] d, boolean[] b) {
         this.pr = pr;
         this.c = c;
         this.a = a;
