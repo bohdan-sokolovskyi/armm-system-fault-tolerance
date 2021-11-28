@@ -16,7 +16,7 @@ public class SystemStateVector {
         return new SystemStateVector(new boolean[5],new boolean[5],new boolean[3],new boolean[2],new boolean[5],new boolean[3]);
     }
 
-    public static SystemStateVector createSSVforModifiedSystem(){
+    public static SystemStateVector createForModifiedSystem(){
         //TODO change for modifiedSystem
         throw new RuntimeException("Not implemented!");
     }
