@@ -17,15 +17,15 @@ public class InitialLogicStructureFunction implements LogicStructureFunction {
     }
 
     boolean f2(){
-        return ssv.d[4] && (ssv.c[2] || ssv.c[3]) && ssv.m[0] && ssv.a[0] && ssv.pr[2];
+        return ssv.d[2] && (ssv.c[1] || ssv.c[2]) && ssv.m[0] && ssv.a[0] && ssv.pr[2];
     }
 
     boolean f3(){
-        return ssv.d[6] && ssv.c[4] && ssv.b[2] && ssv.pr[4];
+        return ssv.d[3] && ssv.c[3] && ssv.b[1] && ssv.pr[4];
     }
 
     boolean f4(){
-        return ssv.d[7] && (ssv.c[4] || ssv.c[5]) && (ssv.b[2] || ssv.b[3]) && (ssv.a[1] || ssv.a[2])
+        return ssv.d[4] && (ssv.c[3] || ssv.c[4]) && (ssv.b[1] || ssv.b[2]) && (ssv.a[1] || ssv.a[2])
                 && (ssv.m[0] || ssv.m[1]) && ssv.a[0] && ssv.pr[3];
     }
 }
