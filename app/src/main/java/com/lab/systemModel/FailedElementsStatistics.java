@@ -3,14 +3,23 @@ package com.lab.systemModel;
 import java.util.Arrays;
 
 public class FailedElementsStatistics {
-    public int[] pr; //processors
-    public int[] c; //controllers
-    public int[] a; //adapters
-    public int[] m; //magistrates
-    public int[] d; //detectors
-    public int[] b; //busses
+    public final int[] pr; //processors
+    public final int[] c; //controllers
+    public final int[] a; //adapters
+    public final int[] m; //magistrates
+    public final int[] d; //detectors
+    public final int[] b; //busses
 
-    public FailedElementsStatistics(int[] pr, int[] c, int[] a, int[] m, int[] d, int[] b) {
+    public static FailedElementsStatistics createForInitialSystem(){
+        return new FailedElementsStatistics(new int[5],new int[5],new int[3],new int[2],new int[5],new int[3]);
+    }
+
+    public static FailedElementsStatistics createForModifiedSystem(){
+        //TODO create then
+        throw new RuntimeException("Not implemented!");
+    }
+
+    private FailedElementsStatistics(int[] pr, int[] c, int[] a, int[] m, int[] d, int[] b) {
         this.pr = pr;
         this.c = c;
         this.a = a;
