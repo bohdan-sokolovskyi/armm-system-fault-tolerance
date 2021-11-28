@@ -8,42 +8,49 @@ public class SystemModel {
     private final LogicStructureFunction logicStructureFunction;
     private final FailedElementsStatistics failedElementsStatistics;
     private final RearrangeTable rearrangeTable;
+    private final int elementsCount;
 
     private SystemStateVector systemStateVector;
 
     public static SystemModel createInitialSystem(){
         return new SystemModel(new InitialLogicStructureFunction(),
                 FailedElementsStatistics.createForInitialSystem(),
-                RearrangeTable.createForInitialSystem());
+                RearrangeTable.createForInitialSystem(),
+                23);
     }
 
     public static SystemModel createModifiedSystem(){
+        //TODO fix elements count soon
         return new SystemModel(new ModifiedLogicStructureFunction(),
                 FailedElementsStatistics.createForModifiedSystem(),
-                RearrangeTable.createForModifiedSystem());
+                RearrangeTable.createForModifiedSystem(),
+                -1);
     }
 
     private SystemModel(LogicStructureFunction logicStructureFunction,
                        FailedElementsStatistics failedElementsStatistics,
-                       RearrangeTable rearrangeTable) {
+                       RearrangeTable rearrangeTable,
+                        int elementsCount) {
         this.logicStructureFunction = logicStructureFunction;
         this.failedElementsStatistics = failedElementsStatistics;
         this.rearrangeTable = rearrangeTable;
+        this.elementsCount = elementsCount;
     }
 
     public TestSSVResult testSystemStateVector(SystemStateVector systemStateVector){
          this.systemStateVector = systemStateVector;
-         boolean res = logicStructureFunction.calculateF(this.systemStateVector);
-         if(!res){
+         boolean isSystemLive = logicStructureFunction.calculateF(this.systemStateVector);
+         if(!isSystemLive){
              SystemStateVector v2 = useRearrangeTable();
-             res = logicStructureFunction.calculateF(v2);
-             if(!res){
+             isSystemLive = logicStructureFunction.calculateF(v2);
+             if(!isSystemLive){
                  failedElementsStatistics.addToStatistics(this.systemStateVector);
              }
          }
          double prob = calculateSSVProbability();
-         return new TestSSVResult(prob,res);
+         return new TestSSVResult(prob,isSystemLive);
     }
+
 
     private SystemStateVector useRearrangeTable(){
         //TODO
@@ -109,13 +116,29 @@ public class SystemModel {
         return  prob;
     }
 
-    static class TestSSVResult{
-        public final double ssvProbabilty;
-        public final boolean res;
+    public FailedElementsStatistics getFailedElementsStatistics() {
+        return failedElementsStatistics;
+    }
 
-        public TestSSVResult(double ssvProbabilty, boolean res) {
+    public int getElementsCount() {
+        return elementsCount;
+    }
+
+    static public class TestSSVResult{
+        public final double ssvProbabilty;
+        public final boolean isSystemLive;
+
+        public TestSSVResult(double ssvProbabilty, boolean isSystemLive) {
             this.ssvProbabilty = ssvProbabilty;
-            this.res = res;
+            this.isSystemLive = isSystemLive;
+        }
+
+        @Override
+        public String toString() {
+            return "TestSSVResult{" +
+                    "ssvProbabilty=" + ssvProbabilty +
+                    ", isSystemLive=" + isSystemLive +
+                    '}';
         }
     }
 }
