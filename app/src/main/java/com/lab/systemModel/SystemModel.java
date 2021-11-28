@@ -18,7 +18,7 @@ public class SystemModel {
         this.rearrangeTable = rearrangeTable;
     }
 
-    public TestSSVResult trySystemStateVector(SystemStateVector systemStateVector){
+    public TestSSVResult testSystemStateVector(SystemStateVector systemStateVector){
          this.systemStateVector = systemStateVector;
          boolean res = logicStructureFunction.calculateF(this.systemStateVector);
          failedElementsStatistics.addToStatistics(this.systemStateVector);
