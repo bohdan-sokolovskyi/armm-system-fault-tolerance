@@ -21,10 +21,12 @@ public class SystemModel {
     public TestSSVResult testSystemStateVector(SystemStateVector systemStateVector){
          this.systemStateVector = systemStateVector;
          boolean res = logicStructureFunction.calculateF(this.systemStateVector);
-         failedElementsStatistics.addToStatistics(this.systemStateVector);
          if(!res){
              SystemStateVector v2 = useRearrangeTable();
              res = logicStructureFunction.calculateF(v2);
+             if(!res){
+                 failedElementsStatistics.addToStatistics(this.systemStateVector);
+             }
          }
          double prob = calculateSSVProbability();
          return new TestSSVResult(prob,res);
