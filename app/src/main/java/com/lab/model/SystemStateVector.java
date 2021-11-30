@@ -1,8 +1,10 @@
-package com.lab.systemModel;
+package com.lab.model;
 
 import java.util.Arrays;
 
-public class SystemStateVector {
+//TODO: arrays maybe simplified ?
+//TODO: need simplified this class
+public final class SystemStateVector {
     public final boolean[] pr; //processors
     public final boolean[] c; //controllers
     public final boolean[] a; //adapters
@@ -17,8 +19,7 @@ public class SystemStateVector {
     }
 
     public static SystemStateVector createForModifiedSystem(){
-        //TODO change for modifiedSystem
-        throw new RuntimeException("Not implemented!");
+        throw new RuntimeException("not implemented");
     }
 
     private SystemStateVector(boolean[] pr, boolean[] c, boolean[] a, boolean[] m, boolean[] d, boolean[] b) {

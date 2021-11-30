@@ -1,8 +1,10 @@
-package com.lab.systemModel;
+package com.lab.model;
 
 import java.util.Arrays;
 
-public class FailedElementsStatistics {
+//TODO: arrays maybe simplified ?
+//TODO: need simplified this class
+public final class FailedElementsStatistics {
     public final int[] pr; //processors
     public final int[] c; //controllers
     public final int[] a; //adapters
@@ -34,7 +36,36 @@ public class FailedElementsStatistics {
                 pr[i]++;
             }
         }
-        //TODO and so on;
+
+        for(int i = 0; i < systemStateVector.c.length; i++){
+            if(!systemStateVector.c[i]){
+                c[i]++;
+            }
+        }
+
+        for(int i = 0; i < systemStateVector.a.length; i++){
+            if(!systemStateVector.a[i]){
+                a[i]++;
+            }
+        }
+
+        for(int i = 0; i < systemStateVector.m.length; i++){
+            if(!systemStateVector.m[i]){
+                m[i]++;
+            }
+        }
+
+        for(int i = 0; i < systemStateVector.d.length; i++){
+            if(!systemStateVector.d[i]){
+                d[i]++;
+            }
+        }
+
+        for(int i = 0; i < systemStateVector.b.length; i++){
+            if(!systemStateVector.b[i]){
+                b[i]++;
+            }
+        }
     }
 
     @Override
