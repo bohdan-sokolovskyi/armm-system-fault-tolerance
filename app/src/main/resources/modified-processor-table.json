@@ -1,0 +1,44 @@
+{
+  "processors" : [
+    {
+      "name": "pr0",
+      "tNom": 10,
+      "tMax": 100,
+      "distributionSchemes": [
+        {},
+        {},
+        {}
+      ]
+    },
+    {
+      "name": "pr1",
+      "tNom": 10,
+      "tMax": 100,
+      "distributionSchemes": [
+        {},
+        {},
+        {}
+      ]
+    },
+    {
+      "name": "pr2",
+      "tNom": 10,
+      "tMax": 100,
+      "distributionSchemes": [
+        {},
+        {},
+        {}
+      ]
+    },
+    {
+      "name": "pr3",
+      "tNom": 10,
+      "tMax": 100,
+      "distributionSchemes": [
+        {},
+        {},
+        {}
+      ]
+    }
+  ]
+}

@@ -1,8 +1,8 @@
-package com.lab.systemModel;
+package com.lab.model;
 
 import java.util.Arrays;
 
-public class SystemStateVector {
+public final class SystemStateVector {
     public final boolean[] pr; //processors
     public final boolean[] c; //controllers
     public final boolean[] a; //adapters
@@ -17,8 +17,11 @@ public class SystemStateVector {
     }
 
     public static SystemStateVector createForModifiedSystem(){
-        //TODO change for modifiedSystem
-        throw new RuntimeException("Not implemented!");
+        throw new RuntimeException("not implemented");
+    }
+
+    public SystemStateVector(SystemStateVector ssv) {
+        this(ssv.pr, ssv.c, ssv.a, ssv.m, ssv.d, ssv.b);
     }
 
     private SystemStateVector(boolean[] pr, boolean[] c, boolean[] a, boolean[] m, boolean[] d, boolean[] b) {
@@ -47,21 +50,29 @@ public class SystemStateVector {
         Arrays.fill(b,true);
     }
 
+    public void setToTrue(int pos) {
+        setTo(pos, true);
+    }
+
     public void setToFalse(int pos){
+        setTo(pos, false);
+    }
+
+    public void setTo(int pos, boolean val) {
         if(pos < 0){
             throw new RuntimeException("pos can't be less 0!");
         }else if(pos < boundaries[0]){
             pr[pos] = false;
         }else if(pos < boundaries[1]){
-            c[pos - boundaries[0]] = false;
+            c[pos - boundaries[0]] = val;
         }else if(pos < boundaries[2]){
-            a[pos - boundaries[1]] = false;
+            a[pos - boundaries[1]] = val;
         }else if(pos < boundaries[3]){
-            m[pos - boundaries[2]] = false;
+            m[pos - boundaries[2]] = val;
         }else if(pos < boundaries[4]){
-            d[pos - boundaries[3]] = false;
+            d[pos - boundaries[3]] = val;
         }else if(pos < boundaries[5]){
-            b[pos - boundaries[4]] = false;
+            b[pos - boundaries[4]] = val;
         }else {
             throw new RuntimeException("pos is greater then " + boundaries[5]);
         }

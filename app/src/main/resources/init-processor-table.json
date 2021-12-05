@@ -1,0 +1,46 @@
+{
+  "processors" : [
+    {
+      "name": "pr0",
+      "timeNom": 10,
+      "timeMax": 100,
+      "schemes": [
+        {
+          "pr1": 5
+        },
+        {},
+        {}
+      ]
+    },
+    {
+      "name": "pr1",
+      "timeNom": 10,
+      "timeMax": 100,
+      "schemes": [
+        {},
+        {},
+        {}
+      ]
+    },
+    {
+      "name": "pr2",
+      "timeNom": 10,
+      "timeMax": 100,
+      "schemes": [
+        {},
+        {},
+        {}
+      ]
+    },
+    {
+      "name": "pr3",
+      "timeNom": 10,
+      "timeMax": 100,
+      "schemes": [
+        {},
+        {},
+        {}
+      ]
+    }
+  ]
+}
