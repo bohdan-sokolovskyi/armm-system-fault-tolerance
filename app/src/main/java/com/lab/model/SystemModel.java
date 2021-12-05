@@ -50,7 +50,7 @@ public class SystemModel {
          boolean isSystemLive = logicStructureFunction.f(this.systemStateVector);
 
          if(!isSystemLive){
-             SystemStateVector v2 = useRearrangeTable();
+             SystemStateVector v2 = distributorManager.distributeProcessors(this.systemStateVector);
              isSystemLive = logicStructureFunction.f(v2);
 
              if(!isSystemLive){
@@ -62,11 +62,6 @@ public class SystemModel {
          return new TestSSVResult(prob, isSystemLive);
     }
 
-    private SystemStateVector useRearrangeTable(){
-        //TODO
-        throw new UnsupportedOperationException("not implemented");
-    }
-
     public FailedElementsStatistics getFailedElementsStatistics() {
         return failedElementsStatistics;
     }
@@ -75,21 +70,10 @@ public class SystemModel {
         return elementsCount;
     }
 
-    static public class TestSSVResult {
-        private final BigDecimal ssvProbability;
-        private final boolean isSystemLive;
-
-        public TestSSVResult(BigDecimal ssvProbability, boolean isSystemLive) {
-            this.ssvProbability = ssvProbability;
-            this.isSystemLive = isSystemLive;
-        }
+    public record TestSSVResult(BigDecimal ssvProbability, boolean isSystemLive) {
 
         public BigDecimal getSsvProbability() {
             return ssvProbability;
-        }
-
-        public boolean isSystemLive() {
-            return isSystemLive;
         }
 
         @Override

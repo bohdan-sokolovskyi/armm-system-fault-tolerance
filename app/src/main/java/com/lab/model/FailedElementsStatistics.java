@@ -2,8 +2,6 @@ package com.lab.model;
 
 import java.util.Arrays;
 
-//TODO: arrays maybe simplified ?
-//TODO: need simplified this class
 public final class FailedElementsStatistics {
     public final int[] pr; //processors
     public final int[] c; //controllers
