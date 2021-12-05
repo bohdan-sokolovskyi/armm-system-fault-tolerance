@@ -43,7 +43,7 @@ public final class ProbabilityCalculator {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        DecimalFormat df = new DecimalFormat("#.00000");
+        DecimalFormat df = new DecimalFormat("#.0000000000000000");
 
         for(int i = 0; i < p.length; i++) {
             result.append(String.format("P[%d] = %s\n", i, df.format(p[i])));
@@ -57,27 +57,27 @@ public final class ProbabilityCalculator {
         BigDecimal prob = new BigDecimal("1.0");
 
         for(var pr: vec.pr){
-            prob = prob.multiply(pr ? PR_I_PROB : BigDecimal.ONE.subtract(PR_I_PROB));
+            prob = prob.multiply(pr ? BigDecimal.ONE.subtract(PR_I_PROB): PR_I_PROB);
         }
 
         for(var b: vec.b) {
-            prob = prob.multiply(b ? B_I_PROB : BigDecimal.ONE.subtract(B_I_PROB));
+            prob = prob.multiply(b ? BigDecimal.ONE.subtract(B_I_PROB): B_I_PROB);
         }
 
         for(var a: vec.a) {
-            prob = prob.multiply(a ? A_I_PROB : BigDecimal.ONE.subtract(A_I_PROB));
+            prob = prob.multiply(a ? BigDecimal.ONE.subtract(A_I_PROB): A_I_PROB);
         }
 
         for(var c: vec.c) {
-            prob = prob.multiply(c ? C_I_PROB : BigDecimal.ONE.subtract(C_I_PROB));
+            prob = prob.multiply(c ? BigDecimal.ONE.subtract(C_I_PROB): C_I_PROB );
         }
 
         for(var d: vec.d) {
-            prob = prob.multiply(d ? D_I_PROB : BigDecimal.ONE.subtract(D_I_PROB));
+            prob = prob.multiply(d ? BigDecimal.ONE.subtract(D_I_PROB): D_I_PROB );
         }
 
         for(var m: vec.m) {
-            prob = prob.multiply(m ? M_I_PROB : BigDecimal.ONE.subtract(M_I_PROB));
+            prob = prob.multiply(m ? BigDecimal.ONE.subtract(M_I_PROB): M_I_PROB );
         }
 
         return prob;

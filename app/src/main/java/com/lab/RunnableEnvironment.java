@@ -35,6 +35,7 @@ public final class RunnableEnvironment {
         runTests();
     }
 
+
     public void runTestModifiedSystem() {
         System.out.println("=== Test of Modified System ===");
         model = SystemModel.createModifiedSystem();
@@ -52,7 +53,7 @@ public final class RunnableEnvironment {
         test3Errors();
         test4Errors();
 
-        //System.out.println(systemModel.getFailedElementsStatistics());
+        System.out.println(model.getFailedElementsStatistics());
 
         System.out.println("= Probability =\n");
         System.out.println(probabilityCalculator);
@@ -90,10 +91,19 @@ public final class RunnableEnvironment {
         }
     }
 
+    public int getTestsCount(int errorsCount){
+        int elems = model.getElementsCount();
+        int res = 1;
+        for(int i = 0; i < errorsCount; i++){
+            res *= elems - i;
+        }
+        return res;
+    }
+
     // 50%
     public void test3Errors() {
         List<Integer> hashes = new ArrayList<>();
-        int count = (int) Math.round(model.getElementsCount() * 0.5);
+        int count = (int) Math.round(getTestsCount(3) * 0.5);
         int i = 0;
 
         while(i != count) {
@@ -125,7 +135,7 @@ public final class RunnableEnvironment {
     // 10 %
     public void test4Errors() {
         List<Integer> hashes = new ArrayList<>();
-        int count = (int) Math.round(model.getElementsCount() * 0.1);
+        int count = (int) Math.round(getTestsCount(4) * 0.1);
         int i = 0;
 
         while(i != count) {
