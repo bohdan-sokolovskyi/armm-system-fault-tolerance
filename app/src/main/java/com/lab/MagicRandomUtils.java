@@ -13,7 +13,7 @@ public final class MagicRandomUtils {
                         .current()
                         .ints(from, to)
                         .distinct()
-                        .limit(3)
+                        .limit(size)
                         .boxed().toArray(Integer[]::new)
         ).mapToInt(Integer::intValue).toArray();
     }
