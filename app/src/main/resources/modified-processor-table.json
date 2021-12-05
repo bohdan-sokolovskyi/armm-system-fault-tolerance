@@ -2,19 +2,21 @@
   "processors" : [
     {
       "name": "pr0",
-      "tNom": 10,
-      "tMax": 100,
-      "distributionSchemes": [
-        {},
+      "timeNom": 40,
+      "timeMax": 100,
+      "schemes": [
+        {
+          "pr1": 5
+        },
         {},
         {}
       ]
     },
     {
       "name": "pr1",
-      "tNom": 10,
-      "tMax": 100,
-      "distributionSchemes": [
+      "timeNom": 70,
+      "timeMax": 100,
+      "schemes": [
         {},
         {},
         {}
@@ -22,9 +24,9 @@
     },
     {
       "name": "pr2",
-      "tNom": 10,
-      "tMax": 100,
-      "distributionSchemes": [
+      "timeNom": 20,
+      "timeMax": 80,
+      "schemes": [
         {},
         {},
         {}
@@ -32,9 +34,19 @@
     },
     {
       "name": "pr3",
-      "tNom": 10,
-      "tMax": 100,
-      "distributionSchemes": [
+      "timeNom": 10,
+      "timeMax": 100,
+      "schemes": [
+        {},
+        {},
+        {}
+      ]
+    },
+    {
+      "name": "pr4",
+      "timeNom": 10,
+      "timeMax": 100,
+      "schemes": [
         {},
         {},
         {}

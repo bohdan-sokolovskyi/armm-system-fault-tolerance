@@ -27,4 +27,11 @@ public class ProcessorTable {
 
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "ProcessorTable{" +
+                "processors=" + processors +
+                '}';
+    }
 }

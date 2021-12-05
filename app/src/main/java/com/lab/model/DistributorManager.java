@@ -2,7 +2,6 @@ package com.lab.model;
 
 import com.lab.Pair;
 import com.lab.table.ProcessorTableReader;
-import com.lab.table.element.DistributionScheme;
 import com.lab.table.element.LiveProcessor;
 import com.lab.table.element.Processor;
 import com.lab.table.element.ProcessorTable;
@@ -35,17 +34,19 @@ public class DistributorManager {
     }
 
     public SystemStateVector distributeProcessors(SystemStateVector ssvP) {
+        //TODO: refactor copy constr
         SystemStateVector ssvV = new SystemStateVector(ssvP);
         ProcessorTable table = processorTableReader.read(processorTableFile);
+        System.out.println(table);
         List<String> failedProcessorNames = failedProcessors.values().stream().map(Pair::getY).map(Processor::getName).toList();
         initLiveAndFailedProcessors(ssvP.pr, table);
 
         if(!failedProcessors.isEmpty()) {
             for(Map.Entry<String, Pair<Integer, Processor>> failPr : failedProcessors.entrySet()) {
                 Processor processor = failPr.getValue().getY();
-                DistributionScheme resultingScheme = null;
+                Map<String, Integer> resultingScheme = null;
 
-                for(DistributionScheme scheme: processor.getSchemes()) {
+                for(Map<String, Integer> scheme: processor.getSchemes()) {
                     if(!schemeContainFailedProcessors(failedProcessorNames, scheme) && canApplyScheme(scheme)) {
                        resultingScheme = scheme;
                        break;
@@ -78,17 +79,17 @@ public class DistributorManager {
         }
     }
 
-    private void applyScheme(SystemStateVector ssv, int i, DistributionScheme scheme) {
+    private void applyScheme(SystemStateVector ssv, int i, Map<String, Integer> scheme) {
         ssv.setToTrue(i);
-        scheme.getScheme().forEach((key, value) -> liveProcessors.get(key).getY().addTime(value));
+        scheme.forEach((key, value) -> liveProcessors.get(key).getY().addTime(value));
     }
 
-    private boolean canApplyScheme(DistributionScheme scheme) {
-        return scheme.getScheme().entrySet().stream().allMatch((e) -> liveProcessors.get(e.getKey()).getY().isCanAddTime(e.getValue()));
+    private boolean canApplyScheme(Map<String, Integer> scheme) {
+        return scheme.entrySet().stream().allMatch((e) -> liveProcessors.get(e.getKey()).getY().isCanAddTime(e.getValue()));
     }
 
-    private boolean schemeContainFailedProcessors(List<String> failedProcessorNames, DistributionScheme scheme) {
-        return failedProcessorNames.stream().anyMatch(scheme::containProcessor);
+    private boolean schemeContainFailedProcessors(List<String> failedProcessorNames, Map<String, Integer> scheme) {
+        return failedProcessorNames.stream().anyMatch(scheme::containsKey);
     }
 
     private String convertProcessorName(int i) {

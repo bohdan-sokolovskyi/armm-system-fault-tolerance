@@ -2,12 +2,13 @@ package com.lab.table.element;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Processor {
     protected String name;
     protected Integer timeNom;
     protected Integer timeMax;
-    protected List<DistributionScheme> schemes;
+    protected List<Map<String, Integer>> schemes;
 
     public Processor() {
         name = null;
@@ -34,7 +35,7 @@ public class Processor {
         this.timeMax = timeMax;
     }
 
-    public void setSchemes(List<DistributionScheme> schemes) {
+    public void setSchemes(List<Map<String, Integer>> schemes) {
         this.schemes = schemes;
     }
 
@@ -50,7 +51,17 @@ public class Processor {
         return timeMax;
     }
 
-    public List<DistributionScheme> getSchemes() {
+    public List<Map<String, Integer>> getSchemes() {
         return schemes;
+    }
+
+    @Override
+    public String toString() {
+        return "Processor{" +
+                "name='" + name + '\'' +
+                ", timeNom=" + timeNom +
+                ", timeMax=" + timeMax +
+                ", schemes=" + schemes +
+                '}';
     }
 }

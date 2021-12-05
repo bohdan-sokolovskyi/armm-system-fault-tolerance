@@ -2,54 +2,90 @@
   "processors" : [
     {
       "name": "pr0",
-      "timeNom": 10,
+      "timeNom": 40,
       "timeMax": 100,
       "schemes": [
         {
-          "pr1": 5
+          "pr1": 30,
+          "pr4": 10
         },
-        {},
-        {}
+        {
+          "pr2": 30,
+          "pr3": 10
+        }
       ]
     },
     {
       "name": "pr1",
-      "timeNom": 10,
+      "timeNom": 70,
       "timeMax": 100,
       "schemes": [
-        {},
-        {},
-        {}
+        {
+          "pr0": 50,
+          "pr2": 20
+        },
+        {
+          "pr0": 50,
+          "pr3": 20
+        },
+        {
+          "pr0": 50,
+          "pr4": 20
+        }
       ]
     },
     {
       "name": "pr2",
-      "timeNom": 10,
-      "timeMax": 100,
+      "timeNom": 20,
+      "timeMax": 80,
       "schemes": [
-        {},
-        {},
-        {}
+        {
+          "pr0": 20
+        },
+        {
+          "pr1": 20
+        },
+        {
+          "pr3": 20
+        },
+        {
+          "pr4": 20
+        }
       ]
     },
     {
       "name": "pr3",
-      "timeNom": 10,
-      "timeMax": 100,
+      "timeNom": 50,
+      "timeMax": 80,
       "schemes": [
-        {},
-        {},
-        {}
+        {
+          "pr0": 50
+        },
+        {
+          "pr1": 20,
+          "pr2": 30
+        },
+        {
+          "pr1": 20,
+          "pr4": 20
+        }
       ]
     },
     {
       "name": "pr4",
-      "timeNom": 10,
+      "timeNom": 30,
       "timeMax": 100,
       "schemes": [
-        {},
-        {},
-        {}
+        {
+          "pr0": 30
+        },
+        {
+          "pr1": 30
+        },
+        {
+          "pr2": 10,
+          "pr3": 20
+        }
       ]
     }
   ]

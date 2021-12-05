@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 
-public final strictfp class ProbabilityCalculator {
+public final class ProbabilityCalculator {
     public static final int COUNT_OF_SUB_PROBABILITIES = 5;
 
     // probabilities of modules
