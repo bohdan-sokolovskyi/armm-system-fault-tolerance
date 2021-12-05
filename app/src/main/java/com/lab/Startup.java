@@ -6,6 +6,6 @@ public final class Startup {
         RunnableEnvironment env = RunnableEnvironment.init();
 
         env.runTestInitialSystem();
-        env.runTestModifiedSystem();
+       // env.runTestModifiedSystem();
     }
 }
