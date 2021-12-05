@@ -3,6 +3,7 @@ package com.lab;
 import com.lab.model.SystemModel;
 import com.lab.model.SystemStateVector;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -110,8 +111,15 @@ public final class RunnableEnvironment {
             ssv.setToFalse(seq[1]);
             ssv.setToFalse(seq[2]);
 
+            SystemModel.TestSSVResult res = model.testSystemStateVector(ssv);
+
+            if(res.isSystemLive()) {
+                probabilityCalculator.addTo(3, res.getSsvProbability());
+            }
+
             i++;
         }
+        probabilityCalculator.multiplyTo(3,new BigDecimal("2.0"));
     }
 
     // 10 %
@@ -136,7 +144,14 @@ public final class RunnableEnvironment {
             ssv.setToFalse(seq[2]);
             ssv.setToFalse(seq[3]);
 
+            SystemModel.TestSSVResult res = model.testSystemStateVector(ssv);
+
+            if(res.isSystemLive()) {
+                probabilityCalculator.addTo(4, res.getSsvProbability());
+            }
+
             i++;
         }
+        probabilityCalculator.multiplyTo(3,new BigDecimal("10.0"));
     }
 }

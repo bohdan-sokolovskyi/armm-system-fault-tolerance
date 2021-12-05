@@ -34,6 +34,8 @@ public final strictfp class ProbabilityCalculator {
         p[i] = p[i].add(val);
     }
 
+    public void multiplyTo(int i, BigDecimal val) { p[i] = p[i].multiply(val);}
+
     public void reset() {
         Arrays.fill(p, BigDecimal.ZERO);
     }
