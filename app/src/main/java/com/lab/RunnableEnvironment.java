@@ -133,6 +133,23 @@ public final class RunnableEnvironment {
         probabilityCalculator.multiplyTo(3,new BigDecimal("2.0"));
     }
 
+    public void test3Full(){
+        for(int i = 0; i < model.getElementsCount() - 1; i++) {
+            for(int j = i + 1; j < model.getElementsCount(); j++) {
+                for(int k = j+1; k < model.getElementsCount(); k++) {
+                    ssv.setAllTrue();
+                    ssv.setToFalse(i);
+                    ssv.setToFalse(j);
+                    ssv.setToFalse(k);
+                    SystemModel.TestSSVResult res = model.testSystemStateVector(ssv);
+                    if (res.isSystemLive()) {
+                        probabilityCalculator.addTo(3, res.getSsvProbability());
+                    }
+                }
+            }
+        }
+    }
+
     // 10 %
     public void test4Errors() {
         List<Integer> hashes = new ArrayList<>();
@@ -164,5 +181,26 @@ public final class RunnableEnvironment {
             i++;
         }
         probabilityCalculator.multiplyTo(3,new BigDecimal("10.0"));
+    }
+
+    public void test4Full(){
+        for(int i = 0; i < model.getElementsCount() - 1; i++) {
+            for(int j = i + 1; j < model.getElementsCount(); j++) {
+                for(int k = j+1; k < model.getElementsCount(); k++){
+                    for(int z= k +1; z < model.getElementsCount(); z++) {
+                        ssv.setAllTrue();
+                        ssv.setToFalse(i);
+                        ssv.setToFalse(j);
+                        ssv.setToFalse(k);
+                        ssv.setToFalse(z);
+                        SystemModel.TestSSVResult res = model.testSystemStateVector(ssv);
+
+                        if (res.isSystemLive()) {
+                            probabilityCalculator.addTo(4, res.getSsvProbability());
+                        }
+                    }
+                }
+            }
+        }
     }
 }
