@@ -40,7 +40,6 @@ public final class RunnableEnvironment {
         System.out.println("=== Test of Modified System ===");
         model = SystemModel.createModifiedSystem();
         ssv = SystemStateVector.createForModifiedSystem();
-
         runTests();
     }
 
@@ -93,11 +92,13 @@ public final class RunnableEnvironment {
 
     public int getTestsCount(int errorsCount){
         int elems = model.getElementsCount();
-        int res = 1;
+        int numerator = 1;
+        int denominator = 1;
         for(int i = 0; i < errorsCount; i++){
-            res *= elems - i;
+            numerator *= elems - i;
+            denominator *= i + 1;
         }
-        return res;
+        return numerator/denominator;
     }
 
     // 50%
