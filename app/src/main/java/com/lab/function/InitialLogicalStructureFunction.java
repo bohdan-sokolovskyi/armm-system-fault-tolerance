@@ -15,7 +15,7 @@ public final class InitialLogicalStructureFunction extends AbstractLogicalStruct
     @Override
     boolean f1() {
         return ssv.d[0] && ssv.d[1] && ssv.c[0] && ssv.b[0]
-                && (ssv.pr[0] || ssv.pr[1] || ssv.a[0] && (ssv.m[0] && ssv.a[1] && ssv.b[1] || ssv.m[1] && ssv.a[2] && ssv.b[2])&& ssv.pr[4]);
+                && (ssv.pr[0] || ssv.pr[1] || ssv.a[0] && (ssv.m[0] && ssv.a[1] && ssv.b[1] || ssv.m[1] && ssv.a[2] && ssv.b[2] && ssv.pr[4]));
     }
 
     @Override
@@ -25,12 +25,12 @@ public final class InitialLogicalStructureFunction extends AbstractLogicalStruct
 
     @Override
     boolean f3() {
-        return ssv.d[3] && ssv.c[3] && ssv.b[1] && (ssv.pr[4] || ssv.a[1] && ssv.m[0] && ssv.a[0] && ssv.b[0] && ssv.pr[0]);
+        return (ssv.d[3] || ssv.d[4]) && ssv.c[3] && ssv.b[1] && (ssv.pr[4] || ssv.a[1] && ssv.m[0] && ssv.a[0] && ssv.b[0] && ssv.pr[0]);
     }
 
     @Override
     boolean f4() {
-        return ssv.d[4] && (ssv.c[3] && ssv.b[1] || ssv.c[4] && ssv.b[2]) && ssv.pr[4];
+        return ssv.d[4] && (ssv.c[3] && ssv.b[1] || ssv.c[4] && (ssv.b[1] || ssv.b[2]) )&& ssv.pr[4];
 
     }
 }

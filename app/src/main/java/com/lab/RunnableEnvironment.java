@@ -49,6 +49,8 @@ public final class RunnableEnvironment {
         test0Errors();
         test1Errors();
         test2Errors();
+        //test3Full();
+        //est4Full();
         test3Errors();
         test4Errors();
 
@@ -60,14 +62,14 @@ public final class RunnableEnvironment {
 
     public void test0Errors() {
         ssv.setAllTrue();
-        probabilityCalculator.set(0, model.testSystemStateVector(ssv).getSsvProbability());
+        probabilityCalculator.set(0, model.testSystemStateVector(ssv,1).getSsvProbability());
     }
 
     public void test1Errors() {
         for(int i = 0; i < model.getElementsCount(); i++) {
             ssv.setAllTrue();
             ssv.setToFalse(i);
-            SystemModel.TestSSVResult res = model.testSystemStateVector(ssv);
+            SystemModel.TestSSVResult res = model.testSystemStateVector(ssv,1);
 
             if(res.isSystemLive()) {
                 probabilityCalculator.addTo(1, res.getSsvProbability());
@@ -81,7 +83,7 @@ public final class RunnableEnvironment {
                 ssv.setAllTrue();
                 ssv.setToFalse(i);
                 ssv.setToFalse(j);
-                SystemModel.TestSSVResult res = model.testSystemStateVector(ssv);
+                SystemModel.TestSSVResult res = model.testSystemStateVector(ssv,1);
 
                 if(res.isSystemLive()) {
                     probabilityCalculator.addTo(2, res.getSsvProbability());
@@ -122,7 +124,7 @@ public final class RunnableEnvironment {
             ssv.setToFalse(seq[1]);
             ssv.setToFalse(seq[2]);
 
-            SystemModel.TestSSVResult res = model.testSystemStateVector(ssv);
+            SystemModel.TestSSVResult res = model.testSystemStateVector(ssv,2);
 
             if(res.isSystemLive()) {
                 probabilityCalculator.addTo(3, res.getSsvProbability());
@@ -141,7 +143,7 @@ public final class RunnableEnvironment {
                     ssv.setToFalse(i);
                     ssv.setToFalse(j);
                     ssv.setToFalse(k);
-                    SystemModel.TestSSVResult res = model.testSystemStateVector(ssv);
+                    SystemModel.TestSSVResult res = model.testSystemStateVector(ssv,1);
                     if (res.isSystemLive()) {
                         probabilityCalculator.addTo(3, res.getSsvProbability());
                     }
@@ -172,7 +174,7 @@ public final class RunnableEnvironment {
             ssv.setToFalse(seq[2]);
             ssv.setToFalse(seq[3]);
 
-            SystemModel.TestSSVResult res = model.testSystemStateVector(ssv);
+            SystemModel.TestSSVResult res = model.testSystemStateVector(ssv,10);
 
             if(res.isSystemLive()) {
                 probabilityCalculator.addTo(4, res.getSsvProbability());
@@ -193,7 +195,7 @@ public final class RunnableEnvironment {
                         ssv.setToFalse(j);
                         ssv.setToFalse(k);
                         ssv.setToFalse(z);
-                        SystemModel.TestSSVResult res = model.testSystemStateVector(ssv);
+                        SystemModel.TestSSVResult res = model.testSystemStateVector(ssv,1);
 
                         if (res.isSystemLive()) {
                             probabilityCalculator.addTo(4, res.getSsvProbability());

@@ -15,8 +15,7 @@ public final class FailedElementsStatistics {
     }
 
     public static FailedElementsStatistics createForModifiedSystem(){
-        //TODO create then
-        throw new RuntimeException("Not implemented!");
+        return new FailedElementsStatistics(new int[5],new int[6],new int[4],new int[2],new int[5],new int[4]);
     }
 
     private FailedElementsStatistics(int[] pr, int[] c, int[] a, int[] m, int[] d, int[] b) {
@@ -28,40 +27,40 @@ public final class FailedElementsStatistics {
         this.b = b;
     }
 
-    public void addToStatistics(SystemStateVector systemStateVector){
+    public void addToStatistics(SystemStateVector systemStateVector, int coef){
         for(int i = 0; i < systemStateVector.pr.length; i++){
             if(!systemStateVector.pr[i]){
-                pr[i]++;
+                pr[i] += coef;
             }
         }
 
         for(int i = 0; i < systemStateVector.c.length; i++){
             if(!systemStateVector.c[i]){
-                c[i]++;
+                c[i] += coef;
             }
         }
 
         for(int i = 0; i < systemStateVector.a.length; i++){
             if(!systemStateVector.a[i]){
-                a[i]++;
+                a[i] += coef;
             }
         }
 
         for(int i = 0; i < systemStateVector.m.length; i++){
             if(!systemStateVector.m[i]){
-                m[i]++;
+                m[i] += coef;
             }
         }
 
         for(int i = 0; i < systemStateVector.d.length; i++){
             if(!systemStateVector.d[i]){
-                d[i]++;
+                d[i] += coef;
             }
         }
 
         for(int i = 0; i < systemStateVector.b.length; i++){
             if(!systemStateVector.b[i]){
-                b[i]++;
+                b[i] += coef;
             }
         }
     }

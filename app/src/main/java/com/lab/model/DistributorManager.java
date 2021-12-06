@@ -37,9 +37,8 @@ public class DistributorManager {
         //TODO: refactor copy constr
         SystemStateVector ssvV = new SystemStateVector(ssvP);
         ProcessorTable table = processorTableReader.read(processorTableFile);
-        System.out.println(table);
-        List<String> failedProcessorNames = failedProcessors.values().stream().map(Pair::getY).map(Processor::getName).toList();
         initLiveAndFailedProcessors(ssvP.pr, table);
+        List<String> failedProcessorNames = failedProcessors.values().stream().map(Pair::getY).map(Processor::getName).toList();
 
         if(!failedProcessors.isEmpty()) {
             for(Map.Entry<String, Pair<Integer, Processor>> failPr : failedProcessors.entrySet()) {
@@ -54,7 +53,7 @@ public class DistributorManager {
                 }
 
                 if(resultingScheme == null) {
-                    System.out.printf("Can't find suitable scheme for %s%n", failPr.getKey());
+                   // System.out.printf("Can't find suitable scheme for %s%n", failPr.getKey());
                 } else {
                     applyScheme(ssvV, failPr.getValue().getX(), resultingScheme);
                 }
