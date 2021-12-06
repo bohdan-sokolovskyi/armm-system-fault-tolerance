@@ -14,6 +14,7 @@ public final class MagicRandomUtils {
                         .ints(from, to)
                         .distinct()
                         .limit(size)
+                        .sorted()
                         .boxed().toArray(Integer[]::new)
         ).mapToInt(Integer::intValue).toArray();
     }
