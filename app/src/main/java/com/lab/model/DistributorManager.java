@@ -34,12 +34,10 @@ public class DistributorManager {
     }
 
     public SystemStateVector distributeProcessors(SystemStateVector ssvP) {
-        //TODO: refactor copy constr
         SystemStateVector ssvV = new SystemStateVector(ssvP);
         ProcessorTable table = processorTableReader.read(processorTableFile);
-        System.out.println(table);
-        List<String> failedProcessorNames = failedProcessors.values().stream().map(Pair::getY).map(Processor::getName).toList();
         initLiveAndFailedProcessors(ssvP.pr, table);
+        List<String> failedProcessorNames = failedProcessors.values().stream().map(Pair::getY).map(Processor::getName).toList();
 
         if(!failedProcessors.isEmpty()) {
             for(Map.Entry<String, Pair<Integer, Processor>> failPr : failedProcessors.entrySet()) {
@@ -85,7 +83,7 @@ public class DistributorManager {
     }
 
     private boolean canApplyScheme(Map<String, Integer> scheme) {
-        return scheme.entrySet().stream().allMatch((e) -> liveProcessors.get(e.getKey()).getY().isCanAddTime(e.getValue()));
+        return scheme.entrySet().stream().allMatch((e) -> Objects.requireNonNull(liveProcessors.get(e.getKey())).getY().isCanAddTime(e.getValue()));
     }
 
     private boolean schemeContainFailedProcessors(List<String> failedProcessorNames, Map<String, Integer> scheme) {

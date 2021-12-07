@@ -21,7 +21,14 @@ public final class SystemStateVector {
     }
 
     public SystemStateVector(SystemStateVector ssv) {
-        this(ssv.pr, ssv.c, ssv.a, ssv.m, ssv.d, ssv.b);
+        this(
+                Arrays.copyOf(ssv.pr, ssv.pr.length),
+                Arrays.copyOf(ssv.c, ssv.c.length),
+                Arrays.copyOf(ssv.a, ssv.a.length),
+                Arrays.copyOf(ssv.m, ssv.m.length),
+                Arrays.copyOf(ssv.d, ssv.d.length),
+                Arrays.copyOf(ssv.b, ssv.b.length)
+        );
     }
 
     private SystemStateVector(boolean[] pr, boolean[] c, boolean[] a, boolean[] m, boolean[] d, boolean[] b) {

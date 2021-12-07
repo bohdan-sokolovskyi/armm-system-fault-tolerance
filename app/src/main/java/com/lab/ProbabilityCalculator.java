@@ -10,7 +10,6 @@ public final class ProbabilityCalculator {
     public static final int COUNT_OF_SUB_PROBABILITIES = 5;
 
     // probabilities of modules
-    //TODO: maybe need set scale
     public static final BigDecimal PR_I_PROB = new BigDecimal("3.2E-4");
     public static final BigDecimal B_I_PROB = new BigDecimal("2.4E-5");
     public static final BigDecimal A_I_PROB = new BigDecimal("2.2E-4");
@@ -43,7 +42,7 @@ public final class ProbabilityCalculator {
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
-        DecimalFormat df = new DecimalFormat("#.0000000000000000");
+        DecimalFormat df = new DecimalFormat("0.0000000000000000");
 
         for(int i = 0; i < p.length; i++) {
             result.append(String.format("P[%d] = %s\n", i, df.format(p[i])));
