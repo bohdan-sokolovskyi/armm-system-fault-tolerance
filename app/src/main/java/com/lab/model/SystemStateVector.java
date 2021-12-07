@@ -17,7 +17,7 @@ public final class SystemStateVector {
     }
 
     public static SystemStateVector createForModifiedSystem(){
-        throw new RuntimeException("not implemented");
+         return new SystemStateVector(new boolean[5],new boolean[6],new boolean[4],new boolean[2],new boolean[5],new boolean[4]);
     }
 
     public SystemStateVector(SystemStateVector ssv) {

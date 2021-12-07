@@ -25,12 +25,11 @@ public class SystemModel {
     }
 
     public static SystemModel createModifiedSystem(){
-        //TODO fix elements count soon
         return new SystemModel(
                 new ModifiedLogicalStructureFunction(),
                 FailedElementsStatistics.createForModifiedSystem(),
                 DistributorManager.createForModifiedSystem(),
-                -1
+                26
         );
     }
 
@@ -45,7 +44,7 @@ public class SystemModel {
         this.elementsCount = elementsCount;
     }
 
-    public TestSSVResult testSystemStateVector(SystemStateVector systemStateVector){
+    public TestSSVResult testSystemStateVector(SystemStateVector systemStateVector, int addCoef){
          this.systemStateVector = systemStateVector;
          boolean isSystemLive = logicStructureFunction.f(this.systemStateVector);
 
@@ -54,7 +53,7 @@ public class SystemModel {
              isSystemLive = logicStructureFunction.f(v2);
 
              if(!isSystemLive){
-                 failedElementsStatistics.addToStatistics(this.systemStateVector);
+                 failedElementsStatistics.addToStatistics(this.systemStateVector, addCoef);
              }
          }
 

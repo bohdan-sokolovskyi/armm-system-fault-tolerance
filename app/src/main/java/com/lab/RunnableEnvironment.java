@@ -40,7 +40,6 @@ public final class RunnableEnvironment {
         System.out.println("=== Test of Modified System ===");
         model = SystemModel.createModifiedSystem();
         ssv = SystemStateVector.createForModifiedSystem();
-
         runTests();
     }
 
@@ -50,6 +49,8 @@ public final class RunnableEnvironment {
         test0Errors();
         test1Errors();
         test2Errors();
+        //test3Full();
+        //est4Full();
         test3Errors();
         test4Errors();
 
@@ -61,14 +62,14 @@ public final class RunnableEnvironment {
 
     public void test0Errors() {
         ssv.setAllTrue();
-        probabilityCalculator.set(0, model.testSystemStateVector(ssv).getSsvProbability());
+        probabilityCalculator.set(0, model.testSystemStateVector(ssv,1).getSsvProbability());
     }
 
     public void test1Errors() {
         for(int i = 0; i < model.getElementsCount(); i++) {
             ssv.setAllTrue();
             ssv.setToFalse(i);
-            SystemModel.TestSSVResult res = model.testSystemStateVector(ssv);
+            SystemModel.TestSSVResult res = model.testSystemStateVector(ssv,1);
 
             if(res.isSystemLive()) {
                 probabilityCalculator.addTo(1, res.getSsvProbability());
@@ -82,7 +83,7 @@ public final class RunnableEnvironment {
                 ssv.setAllTrue();
                 ssv.setToFalse(i);
                 ssv.setToFalse(j);
-                SystemModel.TestSSVResult res = model.testSystemStateVector(ssv);
+                SystemModel.TestSSVResult res = model.testSystemStateVector(ssv,1);
 
                 if(res.isSystemLive()) {
                     probabilityCalculator.addTo(2, res.getSsvProbability());
@@ -93,11 +94,13 @@ public final class RunnableEnvironment {
 
     public int getTestsCount(int errorsCount){
         int elems = model.getElementsCount();
-        int res = 1;
+        int numerator = 1;
+        int denominator = 1;
         for(int i = 0; i < errorsCount; i++){
-            res *= elems - i;
+            numerator *= elems - i;
+            denominator *= i + 1;
         }
-        return res;
+        return numerator/denominator;
     }
 
     // 50%
@@ -121,7 +124,7 @@ public final class RunnableEnvironment {
             ssv.setToFalse(seq[1]);
             ssv.setToFalse(seq[2]);
 
-            SystemModel.TestSSVResult res = model.testSystemStateVector(ssv);
+            SystemModel.TestSSVResult res = model.testSystemStateVector(ssv,2);
 
             if(res.isSystemLive()) {
                 probabilityCalculator.addTo(3, res.getSsvProbability());
@@ -130,6 +133,23 @@ public final class RunnableEnvironment {
             i++;
         }
         probabilityCalculator.multiplyTo(3,new BigDecimal("2.0"));
+    }
+
+    public void test3Full(){
+        for(int i = 0; i < model.getElementsCount() - 1; i++) {
+            for(int j = i + 1; j < model.getElementsCount(); j++) {
+                for(int k = j+1; k < model.getElementsCount(); k++) {
+                    ssv.setAllTrue();
+                    ssv.setToFalse(i);
+                    ssv.setToFalse(j);
+                    ssv.setToFalse(k);
+                    SystemModel.TestSSVResult res = model.testSystemStateVector(ssv,1);
+                    if (res.isSystemLive()) {
+                        probabilityCalculator.addTo(3, res.getSsvProbability());
+                    }
+                }
+            }
+        }
     }
 
     // 10 %
@@ -154,7 +174,7 @@ public final class RunnableEnvironment {
             ssv.setToFalse(seq[2]);
             ssv.setToFalse(seq[3]);
 
-            SystemModel.TestSSVResult res = model.testSystemStateVector(ssv);
+            SystemModel.TestSSVResult res = model.testSystemStateVector(ssv,10);
 
             if(res.isSystemLive()) {
                 probabilityCalculator.addTo(4, res.getSsvProbability());
@@ -163,5 +183,26 @@ public final class RunnableEnvironment {
             i++;
         }
         probabilityCalculator.multiplyTo(3,new BigDecimal("10.0"));
+    }
+
+    public void test4Full(){
+        for(int i = 0; i < model.getElementsCount() - 1; i++) {
+            for(int j = i + 1; j < model.getElementsCount(); j++) {
+                for(int k = j+1; k < model.getElementsCount(); k++){
+                    for(int z= k +1; z < model.getElementsCount(); z++) {
+                        ssv.setAllTrue();
+                        ssv.setToFalse(i);
+                        ssv.setToFalse(j);
+                        ssv.setToFalse(k);
+                        ssv.setToFalse(z);
+                        SystemModel.TestSSVResult res = model.testSystemStateVector(ssv,1);
+
+                        if (res.isSystemLive()) {
+                            probabilityCalculator.addTo(4, res.getSsvProbability());
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -52,7 +52,7 @@ public class DistributorManager {
                 }
 
                 if(resultingScheme == null) {
-                    System.out.printf("Can't find suitable scheme for %s%n", failPr.getKey());
+                   // System.out.printf("Can't find suitable scheme for %s%n", failPr.getKey());
                 } else {
                     applyScheme(ssvV, failPr.getValue().getX(), resultingScheme);
                 }

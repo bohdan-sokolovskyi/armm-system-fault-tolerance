@@ -48,6 +48,14 @@ public final class ProbabilityCalculator {
             result.append(String.format("P[%d] = %s\n", i, df.format(p[i])));
         }
 
+        BigDecimal workProbability = new BigDecimal("0");
+        for(var prob: p){
+            workProbability = workProbability.add(prob);
+        }
+
+        result.append(String.format("\nWork probability: %s", df.format(workProbability)));
+        result.append(String.format("\nFailure probability: %s", df.format(BigDecimal.ONE.subtract(workProbability))));
+
         return result.toString();
     }
 
