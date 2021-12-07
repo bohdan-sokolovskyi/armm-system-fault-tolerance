@@ -67,13 +67,11 @@ public final class FailedElementsStatistics {
 
     @Override
     public String toString() {
-        return "FailedElementsStatistics{" +
-                "pr=" + Arrays.toString(pr) +
-                ", c=" + Arrays.toString(c) +
-                ", a=" + Arrays.toString(a) +
-                ", m=" + Arrays.toString(m) +
-                ", d=" + Arrays.toString(d) +
-                ", b=" + Arrays.toString(b) +
-                '}';
+        return String.format("pr: %s\n", Arrays.toString(pr)) +
+                String.format("c: %s\n", Arrays.toString(c)) +
+                String.format("a: %s\n", Arrays.toString(a)) +
+                String.format("m: %s\n", Arrays.toString(m)) +
+                String.format("d: %s\n", Arrays.toString(d)) +
+                String.format("b: %s\n", Arrays.toString(b));
     }
 }

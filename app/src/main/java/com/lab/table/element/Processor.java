@@ -1,20 +1,19 @@
 package com.lab.table.element;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Processor {
     protected String name;
     protected Integer timeNom;
     protected Integer timeMax;
-    protected List<Map<String, Integer>> schemes;
+    protected Map<String, Integer> schemes;
 
     public Processor() {
         name = null;
         timeNom = -1;
         timeMax = -1;
-        schemes = new ArrayList<>();
+        schemes = new HashMap<>();
     }
 
     public Processor(Processor processor) {
@@ -35,7 +34,7 @@ public class Processor {
         this.timeMax = timeMax;
     }
 
-    public void setSchemes(List<Map<String, Integer>> schemes) {
+    public void setSchemes(Map<String, Integer> schemes) {
         this.schemes = schemes;
     }
 
@@ -51,7 +50,7 @@ public class Processor {
         return timeMax;
     }
 
-    public List<Map<String, Integer>> getSchemes() {
+    public Map<String, Integer> getSchemes() {
         return schemes;
     }
 

@@ -28,7 +28,7 @@ public final class RunnableEnvironment {
     }
 
     public void runTestInitialSystem() {
-        System.out.println("=== Test of Initial System ===");
+        System.out.println("\n\n=== Test of Initial System ===\n");
         model = SystemModel.createInitialSystem();
         ssv = SystemStateVector.createForInitialSystem();
 
@@ -37,7 +37,7 @@ public final class RunnableEnvironment {
 
 
     public void runTestModifiedSystem() {
-        System.out.println("=== Test of Modified System ===");
+        System.out.println("\n\n=== Test of Modified System ===\n");
         model = SystemModel.createModifiedSystem();
         ssv = SystemStateVector.createForModifiedSystem();
         runTests();
@@ -54,9 +54,10 @@ public final class RunnableEnvironment {
         test3Errors();
         test4Errors();
 
+        System.out.println("= Failed elements statistics =");
         System.out.println(model.getFailedElementsStatistics());
 
-        System.out.println("= Probability =\n");
+        System.out.println("= Probability =");
         System.out.println(probabilityCalculator);
     }
 

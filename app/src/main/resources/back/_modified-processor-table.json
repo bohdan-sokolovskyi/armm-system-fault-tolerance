@@ -1,0 +1,91 @@
+{
+  "processors" : [
+    {
+      "name": "pr0",
+      "timeNom": 40,
+      "timeMax": 100,
+      "schemes": [
+        {
+          "pr2": 40
+        },
+        {
+          "pr2": 30,
+          "pr3": 10
+        },
+        {
+          "pr4": 40
+        }
+      ]
+    },
+    {
+      "name": "pr1",
+      "timeNom": 55,
+      "timeMax": 100,
+      "schemes": [
+        {
+          "pr0": 30,
+          "pr2": 25
+        },
+        {
+          "pr2": 55
+        },
+        {
+          "pr3": 30,
+          "pr4": 25
+        }
+      ]
+    },
+    {
+      "name": "pr2",
+      "timeNom": 60,
+      "timeMax": 120,
+      "schemes": [
+        {
+          "pr0": 60
+        },
+        {
+          "pr1": 25,
+          "pr3": 35
+        },
+        {
+          "pr3": 35,
+          "pr4": 25
+        }
+      ]
+    },
+    {
+      "name": "pr3",
+      "timeNom": 50,
+      "timeMax": 100,
+      "schemes": [
+        {
+          "pr0": 50
+        },
+        {
+          "pr1": 30,
+          "pr4": 20
+        },
+        {
+          "pr2": 50
+        }
+      ]
+    },
+    {
+      "name": "pr4",
+      "timeNom": 60,
+      "timeMax": 115,
+      "schemes": [
+        {
+          "pr0": 60
+        },
+        {
+          "pr1": 40,
+          "pr3": 20
+        },
+        {
+          "pr2": 60
+        }
+      ]
+    }
+  ]
+}

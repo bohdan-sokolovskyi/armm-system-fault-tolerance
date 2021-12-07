@@ -37,22 +37,49 @@ public class DistributorManager {
         SystemStateVector ssvV = new SystemStateVector(ssvP);
         ProcessorTable table = processorTableReader.read(processorTableFile);
         initLiveAndFailedProcessors(ssvP.pr, table);
-        List<String> failedProcessorNames = failedProcessors.values().stream().map(Pair::getY).map(Processor::getName).toList();
 
         if(!failedProcessors.isEmpty()) {
             for(Map.Entry<String, Pair<Integer, Processor>> failPr : failedProcessors.entrySet()) {
                 Processor processor = failPr.getValue().getY();
-                Map<String, Integer> resultingScheme = null;
+                Map<String, Integer> resultingScheme = new HashMap<>();
+                var schemes = processor.getSchemes().entrySet();
+                int res = -1;
 
-                for(Map<String, Integer> scheme: processor.getSchemes()) {
-                    if(!schemeContainFailedProcessors(failedProcessorNames, scheme) && canApplyScheme(scheme)) {
-                       resultingScheme = scheme;
-                       break;
+                for(var scheme: schemes) {
+                    Pair<Integer, LiveProcessor> pair = liveProcessors.get(scheme.getKey());
+
+                    if(pair != null && pair.getY().isCanAddTime(scheme.getValue())) {
+                        res = scheme.getValue();
+                        resultingScheme.put(scheme.getKey(), scheme.getValue());
+
+                        for(var scheme2: schemes) {
+                            Pair<Integer, LiveProcessor> pair2 = liveProcessors.get(scheme2.getKey());
+
+                            if(pair2 != null && !scheme.getKey().equals(scheme2.getKey()) && pair2.getY().isCanAddTime(scheme2.getValue()) ) {
+                                res += scheme2.getValue();
+
+                                if(res == processor.getTimeNom()) {
+                                    resultingScheme.put(scheme2.getKey(), scheme.getValue());
+                                    break;
+                                } else if(res > processor.getTimeNom()) {
+                                    resultingScheme.clear();
+                                    res = -1;
+                                    break;
+                                } else {
+                                    resultingScheme.put(scheme2.getKey(), scheme.getValue());
+                                }
+                            }
+                        }
+                    }
+
+                    if(res != -1) {
+                        break;
                     }
                 }
 
-                if(resultingScheme == null) {
-                   // System.out.printf("Can't find suitable scheme for %s%n", failPr.getKey());
+                if(resultingScheme.isEmpty()) {
+                   // for debug
+                   //System.out.printf("Can't find suitable scheme for %s%n", failPr.getKey());
                 } else {
                     applyScheme(ssvV, failPr.getValue().getX(), resultingScheme);
                 }
